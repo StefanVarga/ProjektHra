@@ -17,9 +17,7 @@ public class GameGraphics extends JFrame {
         this.draw = new Draw();
 
 
-
-
-        setSize(800, 510);
+        setSize(800, 520);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setVisible(true);
         setLocationRelativeTo(null);
@@ -30,9 +28,9 @@ public class GameGraphics extends JFrame {
 
         add(draw);
         try {
-            menu = ImageIO.read(new File("src/main/resources/barrier.jpg"));
-            gameOver = ImageIO.read(new File("src/main/resources/gameOver.png"));
-            gameRules = ImageIO.read(new File("src/main/resources/bg.jpg"));
+            menu = ImageIO.read(new File("src/main/resources/menu.jpg"));
+            gameOver = ImageIO.read(new File("src/main/resources/gameOver.jpg"));
+            gameRules = ImageIO.read(new File("src/main/resources/rules.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
                  }
@@ -48,7 +46,7 @@ public class GameGraphics extends JFrame {
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             g.setFont(new Font("NFS Font", Font.BOLD, 30));
-            g.setColor(Color.gray);
+            g.setColor(Color.white);
 
             if(logic.gameActive == 0) {
                 g.drawImage(menu, 0, 0, 800, 500, null);
@@ -58,17 +56,17 @@ public class GameGraphics extends JFrame {
             }
             if (logic.gameActive == 1) {
                 for (Object object : logic.backgrounds) {
-                    object.draw(g);
+                    g.drawImage(object.getImg(), object.x, object.y, object.getWidth(), object.getHeight(), null);
                 }
-                for(Object hearth: logic.hearts) {
-                    hearth.draw(g);
+                for(Object object: logic.hearts) {
+                    g.drawImage(object.getImg(), object.x, object.y, object.getWidth(), object.getHeight(), null);
                 }
-                logic.car.draw(g);
+                g.drawImage(logic.car.getImg(), logic.car.x, logic.car.y, logic.car.getWidth(), logic.car.getHeight(), null);
                 for (Object object : logic.points) {
-                    object.draw(g);
+                    g.drawImage(object.getImg(), object.x, object.y, object.getWidth(), object.getHeight(), null);
                 }
-                for (Object barrier : logic.barriers) {
-                    barrier.draw(g);
+                for (Object object : logic.barriers) {
+                    g.drawImage(object.getImg(), object.x, object.y, object.getWidth(), object.getHeight(), null);
                 }
                 g.drawString("Health   " + logic.car.health+" /3", 550, 30);
             }
