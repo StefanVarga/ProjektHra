@@ -17,10 +17,6 @@ public class Entity extends Coordinates {
         this.height = height;
     }
 
-    public void draw(Graphics g) {
-        g.drawImage(img, x, y, width, height, null);
-    }
-
     public void setImage(String file) {
         try {
             img = ImageIO.read(new File("src/main/resources/" + file));
@@ -32,6 +28,15 @@ public class Entity extends Coordinates {
     public Rectangle getRectangle() {
         return new Rectangle(x, y, width, height);
     }
+    public BufferedImage getImg() {
+        return img;
+    }
 
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
 }
-
